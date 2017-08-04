@@ -1,3 +1,15 @@
+
+GIT_COMMIT_REV = $(shell git log -n1 --format='%h')
+GIT_COMMIT_SHA = $(shell git log -n1 --format='%H')
+GIT_REMOTE_ORIGIN_URL = $(shell git config --get remote.origin.url)
+
+DATE_MONTH = $(shell date "+%e %h" | tr "[:lower:]" "[:upper:]")
+DATE_VERSION = $(shell date "+%Y.%m.%d")
+
+LOCAL_BRANCH = $(shell git rev-parse --abbrev-ref HEAD)
+BRANCH = $(shell echo $(shell whoami)-$(shell git rev-parse --abbrev-ref HEAD))
+
+
 all: init test docs package
 init:
     # - Install your dependencies via gem, maven, etc.
@@ -27,9 +39,23 @@ deploy:
 
 
 ## GIT STUFF
+git:
+	@echo "GIT_COMMIT_REV: \t \t ${GIT_COMMIT_REV}"
+	@echo "GIT_COMMIT_SHA: \t \t ${GIT_COMMIT_SHA}" 
+	@echo "GIT_REMOTE_ORIGIN_URL: \t \t ${GIT_REMOTE_ORIGIN_URL}" 
+	@echo "GIT_COMMIT_REV: \t \t ${GIT_COMMIT_REV}" 
+	@echo "GIT_COMMIT_REV: \t \t ${GIT_COMMIT_REV}" 
+	
+
+
 # make git m="My comment".
-git-comment:
+git-commit:
 	git add -A .
 	git commit -m "$m"
+
+git-push:
+	git push origin -f LOCAL_BRANCH
+
+git-pull:
 
 
