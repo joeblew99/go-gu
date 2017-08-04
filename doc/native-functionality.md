@@ -8,7 +8,7 @@ These are in order of the need.
 
 ## Window
 
-### Where is the GLCanvas ??? Shiny is the core
+### Where is the GLCanvas issues ??? 
 dskinner versus ebiten versus xlab ?
 
 Basically SHINY is a failure because you cant control the blooody glcanvas on mobile properly.
@@ -26,12 +26,19 @@ https://github.com/hajimehoshi/ebiten
 ## Input - Keys, Touches, Gesture determination
 This is the core start of any app, because you need a Window and then key & touch events. 
 
+Shiny and Ebiten have this mostly working..
+
 https://github.com/hajimehoshi/ebiten
 - Works on Desktop, Mobiles and Web.
 
 
 ## Virtual keyboard
 On mobile the user touches in an openGL TextBox, and the virtual keyboard should come up.
+You type and the text typed is forwarding back into the openGL Textbox.
+
+When the virtual keyboard opens, the openGl canvas MUST be moved up so that the TextBox stays in view. 
+This is a huge problem that occurs when using a webview.
+
 
 xlab has Android code working :)
 - https://github.com/xlab/android-go/blob/master/android/jni_util.go
@@ -41,11 +48,30 @@ xlab has Android code working :)
 On Mobile, the user needs to cut and paste text in a TextBox.
 On Desktop, the same, but also the CONTROL keys also work.
 
-Printing/Scanning
-Ability to send documents to the Printer.
 
 https://github.com/aarzilli/nucular/tree/master/clipboard
 Works well on Desktops
+
+## Printing/Scanning
+This means that when the user presses a PRINT button (that you Or the Mobile OS provides), you just run a PDF template for the print size selected.
+
+There are a few aspects to this. Each one is part of the pipeline.
+
+Step 1 - Ability to Bring up Native Printer dialog.
+- Google has code for this for Desktop...
+- We want to know the Paper size so we can move into Step 2.
+
+
+Step 2 - Ability to output to a printable format. 
+- For now have a PDF Template in golang is good enough for now.
+- The template is modified based on the Page size the user chooses.
+
+
+Step 3 - Ability to send documents to the Printer.
+- Some magic c code :)
+
+
+
 
 ## Audio and Video capture and playback
 Existing Libs
