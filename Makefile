@@ -16,6 +16,10 @@ init:
     # - Download sql dumps or copy configuration templates
     #   that a dev needs to get up and running.
     # - Install git hooks (more below)
+
+    ## Get the golang make file, and then do nothing else here :)
+    go get -u -v github.com/go-task/task/cmd/task
+
 test:
     # Run unit tests, code coverage, and linters
 docs:

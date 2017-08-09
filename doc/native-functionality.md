@@ -20,6 +20,20 @@ https://github.com/hajimehoshi/ebiten
 - ebiten uses a glcanvas at the java and objective c level for mobile and then glfw for desktop.
 - dskinner is using Shiny. But how to sign his code because he is using gomobile build, rather than gomobile bind ?
 
+
+https://github.com/gomatcha/matcha
+- This is easily the most mature and promising.
+- Everything is done is golang, and there is a small bridge over PB's to hook into UIKit.
+	- The UIKIt controls are only instantiated. All control of them is at golang level.
+	- SO the PB's provide a two way communication over a relay network (or some kind).
+- What's in it for us ?
+	- Its really just a remote way to build a UIKIT app. 
+	- But the way it hooks into Keyboard is great: https://github.com/gomatcha/matcha/blob/master/keyboard/keyboard.go
+		- We can use this bridge technque for All other OS's as a pattern.
+		 
+
+
+
 ### Shaders 
 
 
@@ -54,6 +68,7 @@ Works well on Desktops
 
 ## Printing/Scanning
 This means that when the user presses a PRINT button (that you Or the Mobile OS provides), you just run a PDF template for the print size selected.
+We dont want to try to print the actual screen from the openGL Canvas at this stage (this can do it though: https://github.com/llgcode/draw2d) 
 
 There are a few aspects to this. Each one is part of the pipeline.
 
